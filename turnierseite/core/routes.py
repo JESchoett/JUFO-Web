@@ -92,3 +92,32 @@ def spiele_einer_gruppe(gruppe_id):
         alle_runden[spiel.runde].append(spiel)
 
     return alle_runden
+
+
+#@core.route('/spielplan/<turnier_id>')
+#def spielplan(turnier_id):
+#    gruppen = Gruppe.query.filter(Gruppe.turnierId == turnier_id).all()
+#    if not gruppen:
+#        flash('es existieren keine Gruppen für das Turnier')
+#
+#    alle_spiele = {}
+#
+#    for gruppe in gruppen:
+#        spiele_max = Spiele.query.filter(Spiele.gruppeId == turnier_id).order_by(Spiele.runde.desc()).first()
+#
+#        for i in range(1, spiele_max.runde):
+#            spiele_in_runde = Spiele.query.filter(Spiele.gruppeId == turnier_id).order_by(Spiele.runde.desc()).first()
+#            alle_spiele[i].append
+#
+#
+#
+#
+#    if not spiele:
+#        flash('es existieren noch keine Spiele')
+#
+#        turniere = Turnier.query.order_by(Turnier.datumDerAustragung.desc()).all()
+#        return render_template('core/index.html', alle_turniere=turniere)
+#
+#    turnier = Turnier.query.filter(Turnier.id == turnier_id).first()
+#
+#    return render_template('tabelle/spielplan.html', turnier=turnier, spiele=spiele)

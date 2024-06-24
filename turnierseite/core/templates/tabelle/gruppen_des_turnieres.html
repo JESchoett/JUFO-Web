@@ -12,6 +12,11 @@
     <div class="col">
     <h1 class="mt-5 mb-3 title-turnier">{{ turnier.name }}</h1>
     </div>
+    <!--
+    <a type="button" class="btn btn-gruppe btn-lg mb-3" href="{{ url_for('core.spielplan', turnier_id=turnier.id) }}">
+        Spielplan
+    </a>
+    -->
     <div class="container">
         <h2 class="mb-4">Gruppenübersicht</h2>
         {% for gruppe in gruppen %}

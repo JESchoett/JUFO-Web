@@ -16,6 +16,7 @@
             <a class="btn btn-outline-danger btn-lg" href="{{ url_for('turnier.turnier_entfernen', turnier_id=turnier.id) }}">Turnier Löschen</a>
         </div>
     </div>
+    {% block turnier_anlage %}{% endblock %}
     <div class="container">
         <div class="row mb-3">
             <div class="col-12">
@@ -68,5 +69,4 @@
         </div>
         {% endfor %}
     </div>
-    {% block turnier_anlage %}{% endblock %}
 {% endblock %}
