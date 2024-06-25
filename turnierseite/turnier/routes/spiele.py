@@ -65,6 +65,7 @@ def spiele_erstellen(turnier_id, gruppe_id, nur_hinrunde):
     turnier, turnier_form, gruppen, gruppen_teams = lade_turnier_daten(turnier_id)
     return render_template('turnier/turnier_details.html', turnier_form=turnier_form, turnier=turnier, gruppen=gruppen, gruppen_teams=gruppen_teams)
 
+
 @spiele.route('/spiele_overview/<turnier_id>')
 @login_required
 def spiele_overview(turnier_id):
@@ -87,7 +88,7 @@ def spiele_overview(turnier_id):
         max_runde = Spiele.query.filter(Spiele.gruppeId == gruppe.id).order_by(Spiele.runde.desc()).first()
 
         if not max_runde:
-            flash('es existieren keine Spiele für die Gruppe  {gruppe.name}')
+            flash(f'es existieren keine Spiele für die {gruppe.name}')
             return redirect(url_for('turnier.turnier_details', turnier_id=turnier_id))
 
         max_runde = max_runde.runde

@@ -27,15 +27,15 @@
         <div class="row mb-4">
             <div class="col-12">
                 <div class="btn-group mb-1" role="group">
-                    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="collapse" data-bs-target="#collapseGruppe{{ gruppe.id }}">
+                    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#collapseGruppe{{ gruppe.id }}">
                         ID: {{ gruppe.id }}
                     </button>
-                    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="collapse" data-bs-target="#collapseGruppe{{ gruppe.id }}">
+                    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#collapseGruppe{{ gruppe.id }}">
                         {{ gruppe.name }}
                     </button>
                     <a class="btn btn-primary btn-lg" href="{{ url_for('spiele.spiele_erstellen', turnier_id=turnier.id, gruppe_id=gruppe.id, nur_hinrunde='hr') }}">Hin-/Rückrunde Generieren</a>
                     <a class="btn btn-primary btn-lg" href="{{ url_for('spiele.spiele_erstellen', turnier_id=turnier.id, gruppe_id=gruppe.id, nur_hinrunde='h') }}">Nur Hinrunde Generieren</a>
-                    <a class="btn btn-primary btn-lg" href="{{ url_for('spiele.spiele_loeschen', turnier_id=turnier.id, gruppe_id=gruppe.id) }}">Spielplan Löschen</a>
+                    <a class="btn btn-danger btn-lg" href="{{ url_for('spiele.spiele_loeschen', turnier_id=turnier.id, gruppe_id=gruppe.id) }}">Spielplan Löschen</a>
                     <a class="btn btn-danger btn-lg" href="{{ url_for('gruppe.gruppe_entfernen', turnier_id=turnier.id, gruppe_id=gruppe.id) }}">Löschen</a>
                 </div>
                 <div class="collapse show" id="collapseGruppe{{ gruppe.id }}">

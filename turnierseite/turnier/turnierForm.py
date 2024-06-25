@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, FloatField,DateField
+from wtforms import StringField, SubmitField, IntegerField, SelectField ,DateField
 from wtforms.validators import DataRequired
 
 class TurnierForm(FlaskForm):
@@ -12,9 +12,9 @@ class GruppeForm(FlaskForm):
     submit = SubmitField(label="Update")
 
 class TeamForm(FlaskForm):
-    gruppe = StringField(label='Gruppe', validators=[DataRequired()])
-    name = StringField(label='Name', validators=[DataRequired()])
-    submit = SubmitField(label="Update")
+    gruppe = SelectField('Gruppe', coerce=int, validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
+    submit = SubmitField('Update')
 
 class SpieleForm(FlaskForm):
     toreT1 = IntegerField(label='Tore Team 1')
