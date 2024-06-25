@@ -62,8 +62,7 @@ def spiele_erstellen(turnier_id, gruppe_id, nur_hinrunde):
                 db.session.add(spiel)
         db.session.commit()
         flash(f'Die Spiele für die Gruppe ID: {gruppe_id} wurden angelegt')
-    turnier, turnier_form, gruppen, gruppen_teams = lade_turnier_daten(turnier_id)
-    return render_template('turnier/turnier_details.html', turnier_form=turnier_form, turnier=turnier, gruppen=gruppen, gruppen_teams=gruppen_teams)
+    return redirect(url_for('turnier.turnier_details', turnier_id=turnier_id))
 
 
 @spiele.route('/spiele_overview/<turnier_id>')
@@ -124,11 +123,10 @@ def spiele_loeschen(turnier_id, gruppe_id):
         db.session.commit()
         flash(f'Die spiele für die Gruppe: {gruppe_id} wurden gelöscht')
 
-    turnier, turnier_form, gruppen, gruppen_teams = lade_turnier_daten(turnier_id)
-    return render_template('turnier/turnier_details.html', turnier_form=turnier_form, turnier=turnier, gruppen=gruppen, gruppen_teams=gruppen_teams)
+    return redirect(url_for('turnier.turnier_details', turnier_id=turnier_id))
 
 # Route to enter game results
-@spiele.route('/spiele_eintragen/<turnier_id>/<gruppe_id>/<spiele_id>', methods=['GET', 'POST'])
+@spiele.route('/spiele_eintragen/<int:turnier_id>/<int:gruppe_id>/<int:spiele_id>', methods=['GET', 'POST'])
 @login_required
 def spiele_eintragen(turnier_id, gruppe_id, spiele_id):
     spiel = Spiele.query.filter(Spiele.id == spiele_id).first()
@@ -136,7 +134,7 @@ def spiele_eintragen(turnier_id, gruppe_id, spiele_id):
 
     if request.method == 'GET':
         turnier, turnier_form, gruppen, gruppen_teams = lade_turnier_daten(turnier_id)
-        return render_template("spiele/spiele_eintragen.html", turnier=turnier,spiel=spiel, spiel_form=spiel_form)
+        return render_template("spiele/spiele_eintragen.html", turnier=turnier, spiel=spiel, spiel_form=spiel_form, turnier_id=turnier_id, gruppe_id=gruppe_id, spiele_id=spiele_id)
 
     elif request.method == 'POST':
         if not spiel_form.validate_on_submit():
@@ -146,13 +144,12 @@ def spiele_eintragen(turnier_id, gruppe_id, spiele_id):
         # Validate score inputs
         if spiel_form.toreT1.data < 0 or spiel_form.toreT2.data < 0:
             flash('Ungültige Tor eingabe')
-            return redirect(url_for('spiele.spiele_overview', turnier_id=turnier_id))
+            return redirect(url_for('spiele.spiele_eintragen', turnier_id=turnier_id, gruppe_id=gruppe_id, spiele_id=spiele_id))
 
         # Load teams
         team1 = Team.query.get(spiel.team1Id)
         team2 = Team.query.get(spiel.team2Id)
 
-        print(f"spiel.gespielt:{spiel.gespielt}")
         if spiel.gespielt == '1':
             reset_gespieltes_spiel(team1, team2, spiel.toreT1, spiel.toreT2)
         else:
@@ -182,8 +179,8 @@ def spiele_eintragen(turnier_id, gruppe_id, spiele_id):
         db.session.add(spiel)
         db.session.commit()
 
-        flash('Spielergebnis erfolgreich eingetragen')
         return redirect(url_for('spiele.spiele_overview', turnier_id=turnier_id))
+
 
 
 # Route to enter game results

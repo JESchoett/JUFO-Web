@@ -19,8 +19,7 @@ def gruppe_erstellen(turnier_id):
         gruppe = Gruppe(turnierId=turnier_id, name=gruppe_form.name.data)
         db.session.add(gruppe)
         db.session.commit()
-        turnier, turnier_form, gruppen, gruppen_teams = lade_turnier_daten(turnier_id)
-        return render_template('turnier/turnier_details.html', turnier_form=turnier_form, turnier=turnier, gruppen=gruppen, gruppen_teams=gruppen_teams)
+        return redirect(url_for('turnier.turnier_details', turnier_id=turnier_id))
 
 @gruppe.route('/gruppe_entfernen/<turnier_id>/<gruppe_id>')
 @login_required
@@ -38,5 +37,4 @@ def gruppe_entfernen(turnier_id, gruppe_id):
         flash(f"Gruppe mit id {gruppe_id} nicht gefunden.")
         return redirect(url_for('turnier.turnier_details', turnier_id=turnier_id))
 
-    turnier, turnier_form, gruppen, gruppen_teams = lade_turnier_daten(turnier_id)
-    return render_template('turnier/turnier_details.html', turnier_form=turnier_form, turnier=turnier, gruppen=gruppen, gruppen_teams=gruppen_teams)
+    return redirect(url_for('turnier.turnier_details', turnier_id=turnier_id))

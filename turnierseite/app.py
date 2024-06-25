@@ -24,8 +24,6 @@ csrf = CSRFProtect()
 def create_app():
     app = Flask(__name__, template_folder='templates')
 
-    #current_dir = os.path.dirname(os.path.abspath('turnierseite.db'))
-    #database_file = os.path.join(current_dir, 'instance', 'turnierseite.db')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///turnierseite.db'# + database_file
 
     #get the Sekret key from a .env file
