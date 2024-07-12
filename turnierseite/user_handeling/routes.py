@@ -10,7 +10,7 @@ user_handeling = Blueprint('user_handeling', __name__, template_folder='template
 
 #login needs to be implemented
 @user_handeling.route("/signup", methods=['GET', 'POST'])
-@login_required
+#@login_required
 def signup_site():
     signup_form = SignupForm()#test crsf
     if signup_form.validate_on_submit():
