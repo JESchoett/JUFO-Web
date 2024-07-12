@@ -28,9 +28,6 @@
             <div class="col-12">
                 <div class="btn-group mb-1" role="group">
                     <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#collapseGruppe{{ gruppe.id }}">
-                        ID: {{ gruppe.id }}
-                    </button>
-                    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#collapseGruppe{{ gruppe.id }}">
                         {{ gruppe.name }}
                     </button>
                     <a class="btn btn-primary btn-lg" href="{{ url_for('spiele.spiele_erstellen', turnier_id=turnier.id, gruppe_id=gruppe.id, nur_hinrunde='hr') }}">Hin-/Rückrunde Generieren</a>
